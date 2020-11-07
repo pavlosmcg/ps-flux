@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import CourseForm from "./CourseForm";
 import { getAuthors } from "../api/authorApi";
+import * as courseApi from "../api/courseApi";
 
 const ManageCoursePage = (props) => {
   const [course, setCourse] = useState({
@@ -31,10 +32,20 @@ const ManageCoursePage = (props) => {
     setCourse(updatedCourse);
   }
 
+  function handleSubmit(event) {
+    event.preventDefault();
+    courseApi.saveCourse(course);
+  }
+
   return (
     <>
       <h2>Manage Course</h2>
-      <CourseForm authors={authors} course={course} onChange={handleChange} />
+      <CourseForm
+        authors={authors}
+        course={course}
+        onChange={handleChange}
+        onSubmit={handleSubmit}
+      />
     </>
   );
 };
