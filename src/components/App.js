@@ -6,10 +6,12 @@ import CoursesPage from "./CoursesPage";
 import Header from "./common/Header";
 import NotFoundPage from "./NotFoundPage";
 import ManageCoursePage from "./ManageCoursePage";
+import { ToastContainer } from "react-toastify";
 
 function App() {
   return (
     <div className="container-fluid">
+      <ToastContainer autoClose={3000} hideProgressBar />
       <Header />
       <Switch>
         <Route path="/" exact component={HomePage} />
