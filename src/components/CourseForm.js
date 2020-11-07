@@ -3,10 +3,6 @@ import TextInput from "./common/TextInput";
 import SelectInput from "./common/SelectInput";
 
 function CourseForm(props) {
-  const options = [
-    { value: "1", label: "Cory House" },
-    { value: "2", label: "Scott Allen" },
-  ];
   return (
     <form>
       <TextInput
@@ -23,7 +19,7 @@ function CourseForm(props) {
         label="Author"
         onChange={props.onChange}
         value={props.course.authorId}
-        options={options}
+        options={props.authors}
       />
 
       <TextInput

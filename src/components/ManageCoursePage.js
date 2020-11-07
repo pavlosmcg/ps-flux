@@ -1,5 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import CourseForm from "./CourseForm";
+import { getAuthors } from "../api/authorApi";
 
 const ManageCoursePage = (props) => {
   const [course, setCourse] = useState({
@@ -9,6 +10,17 @@ const ManageCoursePage = (props) => {
     authorId: null,
     category: "",
   });
+  const [authors, setAuthors] = useState([]);
+
+  useEffect(() => {
+    getAuthors().then((_authors) =>
+      setAuthors(
+        _authors.map((author) => {
+          return { value: author.id.toString(), label: author.name };
+        })
+      )
+    );
+  }, []);
 
   function handleChange({ target }) {
     const { name, value } = target;
@@ -22,7 +34,7 @@ const ManageCoursePage = (props) => {
   return (
     <>
       <h2>Manage Course</h2>
-      <CourseForm course={course} onChange={handleChange} />
+      <CourseForm authors={authors} course={course} onChange={handleChange} />
     </>
   );
 };
