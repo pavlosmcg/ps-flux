@@ -16,26 +16,19 @@ function CoursesPage() {
   }, []);
 
   function onChange() {
-    const _courses = courseStore.getCourses();
-    if (_courses) {
-      // map courses into a collection that also includes author names:
-      getAuthors().then((authors) => {
-        const coursesWithAuthorNames = courseStore
-          .getCourses()
-          .map((course) => {
-            // find the author from the authors api response:
-            const author = authors.find(
-              (author) => author.id === course.authorId
-            );
-            // attach the author name to the course object:
-            return {
-              ...course,
-              authorName: author.name,
-            };
-          });
-        setCourses(coursesWithAuthorNames);
+    // map courses into a collection that also includes author names:
+    getAuthors().then((authors) => {
+      const coursesWithAuthorNames = courseStore.getCourses().map((course) => {
+        // find the author from the authors api response:
+        const author = authors.find((author) => author.id === course.authorId);
+        // attach the author name to the course object:
+        return {
+          ...course,
+          authorName: author.name,
+        };
       });
-    }
+      setCourses(coursesWithAuthorNames);
+    });
   }
 
   return (
