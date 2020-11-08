@@ -9,6 +9,10 @@ function CoursesPage() {
   const [courses, setCourses] = useState([]);
 
   useEffect(() => {
+    courseStore.addChangeListener(onChange);
+  }, []);
+
+  function onChange() {
     // map courses into a collection that also includes author names:
     getAuthors().then((authors) => {
       const coursesWithAuthorNames = courseStore.getCourses().map((course) => {
@@ -22,7 +26,7 @@ function CoursesPage() {
       });
       setCourses(coursesWithAuthorNames);
     });
-  }, []);
+  }
 
   return (
     <>
