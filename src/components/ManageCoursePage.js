@@ -16,8 +16,15 @@ const ManageCoursePage = (props) => {
   const [authors, setAuthors] = useState([]);
 
   useEffect(() => {
+    // get the authors for the dropdowns
     getAuthors().then((_authors) => setAuthors(_authors));
-  }, []);
+
+    // get the current course (if any) from the path "/course/:slug"
+    const slug = props.match.params.slug;
+    if (slug) {
+      courseApi.getCourseBySlug(slug).then((_course) => setCourse(_course));
+    }
+  }, [props.match.params.slug]);
 
   function handleChange({ target }) {
     const { name, value } = target;
