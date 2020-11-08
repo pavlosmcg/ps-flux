@@ -16,13 +16,7 @@ const ManageCoursePage = (props) => {
   const [authors, setAuthors] = useState([]);
 
   useEffect(() => {
-    getAuthors().then((_authors) =>
-      setAuthors(
-        _authors.map((author) => {
-          return { value: author.id.toString(), label: author.name };
-        })
-      )
-    );
+    getAuthors().then((_authors) => setAuthors(_authors));
   }, []);
 
   function handleChange({ target }) {

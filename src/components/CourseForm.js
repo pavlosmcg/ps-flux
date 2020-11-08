@@ -21,7 +21,9 @@ function CourseForm(props) {
         label="Author"
         onChange={props.onChange}
         value={props.course.authorId}
-        options={props.authors}
+        options={props.authors.map((author) => {
+          return { value: author.id.toString(), label: author.name };
+        })}
         error={props.errors.authorId}
       />
 
@@ -40,6 +42,12 @@ function CourseForm(props) {
 }
 
 CourseForm.propTypes = {
+  authors: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.number.isRequired,
+      name: PropTypes.string.isRequired,
+    })
+  ),
   course: PropTypes.object.isRequired,
   errors: PropTypes.object.isRequired,
   onSubmit: PropTypes.func.isRequired,
