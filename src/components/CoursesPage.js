@@ -4,12 +4,15 @@ import { useState, useEffect } from "react";
 import courseStore from "../stores/courseStore";
 import { getAuthors } from "../api/authorApi";
 import CourseList from "./CourseList";
+import { loadCourses } from "../actions/courseActions";
 
 function CoursesPage() {
   const [courses, setCourses] = useState([]);
 
   useEffect(() => {
     courseStore.addChangeListener(onChange);
+    if (courseStore.getCourses().length === 0) loadCourses();
+    return () => courseStore.removeChangeListener(onChange); // cleanup on unmount
   }, []);
 
   function onChange() {
