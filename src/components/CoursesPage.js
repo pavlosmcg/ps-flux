@@ -7,7 +7,7 @@ import CourseList from "./CourseList";
 import { loadCourses } from "../actions/courseActions";
 
 function CoursesPage() {
-  const [courses, setCourses] = useState([]);
+  const [courses, setCourses] = useState(courseStore.getCourses());
 
   useEffect(() => {
     courseStore.addChangeListener(onChange);
