@@ -33,6 +33,15 @@ export function loadCourses() {
   });
 }
 
+export function deleteCourse(id) {
+  return courseApi.deleteCourse(id).then(() => {
+    dispatcher.dispatch({
+      actionType: actionTypes.DELETE_COURSE,
+      id: id,
+    });
+  });
+}
+
 function updateCourseWithAuthorName(course, authors) {
   // find the author from the authors api response:
   const author = authors.find((author) => author.id === course.authorId);
