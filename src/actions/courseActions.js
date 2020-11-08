@@ -8,7 +8,9 @@ export function saveCourse(course) {
     dispatcher.dispatch(
       // action itself
       {
-        actionType: actionTypes.CREATE_COURSE,
+        actionType: course.id
+          ? actionTypes.UPDATE_COURSE
+          : actionTypes.CREATE_COURSE,
         course: savedCourse,
       }
     );
